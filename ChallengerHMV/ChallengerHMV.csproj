@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChallengerHMV.Domain\ChallengerHMV.Domain.csproj" />
+    <ProjectReference Include="..\ChallengerHMV.Infra.Ioc\ChallengerHMV.Infra.Ioc.csproj" />
+    <ProjectReference Include="..\ChallengerHMV.Services\ChallengerHMV.Services.csproj" />
   </ItemGroup>
 
 </Project>

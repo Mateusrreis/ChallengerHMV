@@ -1,5 +1,6 @@
 global using System.Linq;
 using ChallengerHMV.Domain.Authentication;
+using ChallengerHMV.Infra.Ioc.Ioc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -31,6 +32,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthUserServices();
 
 var app = builder.Build();
 
