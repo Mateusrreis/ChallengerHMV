@@ -1,11 +1,10 @@
 using ChallengerHMV.Domain.Authentication;
 using ChallengerHMV.Services.AuthenticationService.Interface;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChallengerHMV.Controllers
 {
-    
+
     [ApiController]
     [Route("[controller]")]
     public class LoginAuthController : ControllerBase
