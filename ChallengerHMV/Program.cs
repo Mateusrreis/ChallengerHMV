@@ -33,6 +33,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthUserServices();
+builder.Services.AddContextDatabase(builder.Configuration);
 
 var app = builder.Build();
 

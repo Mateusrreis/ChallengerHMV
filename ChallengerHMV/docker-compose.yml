@@ -1,0 +1,17 @@
+version: '3'
+services:
+    dbdatabase:
+      image: postgres
+      environment:
+        POSTGRES_USER: "challengerAdmin"
+        POSTGRES_PASSWORD: "challenger2022"
+        POSTGRES_DB: "challengerDb"
+      volumes:
+        - "C:/Database:/var/lib/postgresql/data"
+      networks:
+        - networkChallenger  
+      ports:
+        - 5432:5432 
+networks:
+  networkChallenger:
+    driver: bridge  
