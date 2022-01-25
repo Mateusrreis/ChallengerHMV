@@ -1,6 +1,7 @@
 global using System.Linq;
 using ChallengerHMV.Domain.Authentication;
 using ChallengerHMV.Infra.Ioc.Ioc;
+using ChallengerHMV.Services.Helpers.Criptographia;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -34,6 +35,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthUserServices();
 builder.Services.AddContextDatabase(builder.Configuration);
+
 
 var app = builder.Build();
 

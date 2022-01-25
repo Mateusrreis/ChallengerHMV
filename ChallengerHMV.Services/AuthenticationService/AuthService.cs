@@ -9,7 +9,7 @@ namespace ChallengerHMV.Services.AuthenticationService
         {
             if (authUser.Username == "admin" && authUser.Password == "testeToken")
             {
-                authUser.Role = "admin";
+                //authUser.Role = "admin";
                 return TokenService.GenerateToken(authUser);
             }
             return string.Empty;

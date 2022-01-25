@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ChallengerHMV.Domain\ChallengerHMV.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>

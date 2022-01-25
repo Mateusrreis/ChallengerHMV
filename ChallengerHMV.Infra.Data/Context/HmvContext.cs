@@ -1,4 +1,4 @@
-﻿using ChallengerHMV.Domain.Entity;
+﻿using ChallengerHMV.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChallengerHMV.Infra.Data.Context
@@ -10,6 +10,6 @@ namespace ChallengerHMV.Infra.Data.Context
         }
 
         DbSet<User> Users { get; set; }
-        DbSet<Role> Roles { get; set;}
+        DbSet<Role> Roles { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using ChallengerHMV.Domain.Entity;
+﻿using ChallengerHMV.Domain.Entities;
 
 namespace ChallengerHMV.Domain.Authentication
 {

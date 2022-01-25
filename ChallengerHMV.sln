@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengerHMV", "ChallengerHMV\ChallengerHMV.csproj", "{0B7CD971-18F2-43B3-8957-86D5EBC1ADBE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{90E76B44-48E2-4740-A6A8-8C04BA7D1A18} = {90E76B44-48E2-4740-A6A8-8C04BA7D1A18}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengerHMV.Domain", "ChallengerHMV.Domain\ChallengerHMV.Domain.csproj", "{3D9ED597-B200-4063-B25B-75CDDCFF241C}"
 EndProject
@@ -11,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengerHMV.Services", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengerHMV.Infra.Ioc", "ChallengerHMV.Infra.Ioc\ChallengerHMV.Infra.Ioc.csproj", "{036A41D0-33DA-409F-89BC-6F506CD23A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengerHMV.Infra.Data", "ChallengerHMV.Infra.Data\ChallengerHMV.Infra.Data.csproj", "{90E76B44-48E2-4740-A6A8-8C04BA7D1A18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengerHMV.Infra.Data", "ChallengerHMV.Infra.Data\ChallengerHMV.Infra.Data.csproj", "{90E76B44-48E2-4740-A6A8-8C04BA7D1A18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
