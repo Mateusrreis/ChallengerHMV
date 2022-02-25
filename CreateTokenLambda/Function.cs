@@ -7,7 +7,7 @@ using CreateTokenLambda.Models;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
-namespace CreateTokenLambda
+namespace SolucionChallenger
 {
     public class Function
     {
@@ -18,12 +18,12 @@ namespace CreateTokenLambda
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public string FunctionHandler(AuthUser input, ILambdaContext context)
+        public string ScheduleAppointment(ScheduleCalendarRequestDto input, ILambdaContext context)
         {
-            return CriptograpyAes.Encriptar(input.User);
+           
         }
 
-        public string HeloWorld()
+        public string GetSchedulesAppointment()
         {
             return "Helo Word";
         }
