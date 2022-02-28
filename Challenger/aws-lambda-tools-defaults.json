@@ -11,7 +11,7 @@
   "package-type": "Zip",
   "function-memory-size": 256,
   "function-timeout": 30,
-  "image-command": "CreateTokenLambda::CreateTokenLambda.Function::FunctionHandler",
+  "image-command": "Challenger::SolucionChallenger.Function::GetSchedulesAppointment",
   "docker-host-build-output-dir": "./bin/Release/lambda-publish",
   "framework": "netcoreapp3.1",
   "function-name": "token-lambda",
