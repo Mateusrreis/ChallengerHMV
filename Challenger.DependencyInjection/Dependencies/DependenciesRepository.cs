@@ -9,7 +9,8 @@ namespace Challenger.DependencyInjection
     {
         public static void AddDependencyRepository(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IRepositoryDoctor, RepositoryMedico>();
+            serviceCollection.AddScoped<IMedicoRepository, MedicoRepository>();
+            serviceCollection.AddScoped<IConsultaRepository, ConsultaRepository>();
         }
     }
 }

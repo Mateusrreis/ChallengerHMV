@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CreateTokenLambda\Challenger.csproj" />
+    <ProjectReference Include="..\Challenger.Models\Challenger.Models.csproj" />
   </ItemGroup>
 
 </Project>

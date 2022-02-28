@@ -1,8 +1,13 @@
 using Amazon.Lambda.Core;
 using Challenger;
 using Challenger.DependencyInjection;
+using Challenger.DependencyInjection.Dependencies;
 using Challenger.Interfaces;
+using Challenger.Models;
+using Challenger.Services.Interfaces;
+using CreateTokenLambda.Models.ResponseDtos;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -12,38 +17,35 @@ namespace SolucionChallenger
 {
     public class Function
     {
-        IBuildChallengerConfiguration buildConfiguration;
-
+        IBuildChallengerConfiguration _buildConfiguration;
+        ServiceProvider _serviceProvider;
+        IConsultaServices _consultaServices;
 
         public Function()
         {
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            buildConfiguration = serviceProvider.GetService<IBuildChallengerConfiguration>();
+            _serviceProvider = BuildServices();
+            _buildConfiguration = _serviceProvider.GetService<IBuildChallengerConfiguration>();
+            _consultaServices = _serviceProvider.GetService<IConsultaServices>();
         }
 
-        /// <summary>
-        /// A simple function that takes a string and returns both the upper and lower case version of the string.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        //public string ScheduleAppointment(ScheduleCalendarRequestDto input, ILambdaContext context)
-        //{
-
-        //}
-
-        public string GetSchedulesAppointment()
+        public async Task<AgendamentoConsultaResponse> AgendarConsultaAsync(CalendarConsultaRequest input)
         {
-            var configuration = buildConfiguration.Configuration["function-name"];
-            return configuration;
+            return await _consultaServices.MarcarConsulta(input);
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IBuildChallengerConfiguration, BuildChallengerConfiguration>();
             serviceCollection.AddDependencyRepository();
+            serviceCollection.AddDependencyServices();
+        }
+
+        private ServiceProvider BuildServices()
+        {
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            return serviceProvider;
         }
     }
 }

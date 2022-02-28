@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Challenger.Models.Models.Entities
+﻿namespace Challenger.Models.Models.Entities
 {
     public class Usuario
     {

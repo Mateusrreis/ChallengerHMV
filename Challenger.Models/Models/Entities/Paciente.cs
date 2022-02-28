@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Challenger.Models.Entities
+﻿namespace Challenger.Models.Entities
 {
     public class Paciente
     {

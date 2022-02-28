@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Challenger.Repository.Repository
 {
-    public class RepositoryMedico : IRepositoryDoctor
+    public class MedicoRepository : IMedicoRepository
     {
         private readonly IDbConnection _dbConnection;
-        public RepositoryMedico() => _dbConnection = ConfigurationDatabase.OpenDatabase();
+        public MedicoRepository() => _dbConnection = ConfigurationDatabase.OpenDatabase();
 
         public async Task<IEnumerable<Medico>> GetDoctorsAsync(int idDoctor)
         {
