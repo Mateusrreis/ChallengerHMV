@@ -4,6 +4,10 @@ namespace Challenger.Models.Entities
 {
     public class Consulta
     {
+        public Consulta()
+        {
+        }
+
         protected Consulta(int idMedico, DateTime dtConsulta, string relatorioMedico, int idPrescricao, int idAtendimento)
         {
             IdMedico = idMedico;

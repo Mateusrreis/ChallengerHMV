@@ -1,7 +1,7 @@
-﻿using Challenger.Repository.Interfaces;
+﻿using Challenger.Models.Models.Interfaces;
+using Challenger.Repository.Interfaces;
 using Challenger.Repository.Repository;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Challenger.DependencyInjection
 {
@@ -11,6 +11,7 @@ namespace Challenger.DependencyInjection
         {
             serviceCollection.AddScoped<IMedicoRepository, MedicoRepository>();
             serviceCollection.AddScoped<IConsultaRepository, ConsultaRepository>();
+            serviceCollection.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
         }
     }
 }

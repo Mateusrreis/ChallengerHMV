@@ -1,16 +1,18 @@
 ﻿using MySql.Data.MySqlClient;
 using Npgsql;
-using System.Threading.Tasks;
+using System;
+using System.Data;
 
 namespace Challenger.Repository.Database
 {
     public static class ConfigurationDatabase
     {
-        static string ConnectionString = "Server=ls-55644b4305aece7da22229120122e652bb78e1c3.cxyr7cur3cov.us-east-1.rds.amazonaws.com;Ports=5432;Database=HMV;User=challengerAdmin; Pwd=*fa7$:oLI$2j+cgpOOvG!S&).U(Wwrk*";
+        static string ConnectionString = @$"Server={Environment.GetEnvironmentVariable("Server")};Database={Environment.GetEnvironmentVariable("Database")};Port=3306;User={Environment.GetEnvironmentVariable("UserDatabaseChallenger")};Password={Environment.GetEnvironmentVariable("Password")}";
         public static MySqlConnection OpenDatabase()
         {
             var connection = new MySqlConnection(ConnectionString);
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
             return connection;
         }
 
