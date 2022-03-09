@@ -33,11 +33,11 @@ namespace Challenger.Repository.Repository
                         	strRelatorioMedico,
                         	idPrescricao,
                         	idAtendimento
-                        HAVING DtConsulta > @dtConsultaDateBegin AND DtConsulta < @dtConsultaDateEnd";
+                        HAVING DtConsulta >= @dtConsultaDate AND @dtConsultaDateEnd =< DtConsulta";
 
                 var parameters = new DynamicParameters();
-                parameters.Add("@dtConsultaDateBegin", dateTime);
-                parameters.Add("@dtConsultaDateEnd", dateTime);
+                parameters.Add("@dtConsultaDate", dateTime.ToString("yyyy-MM-dd 00:00:00"));
+                parameters.Add("@dtConsultaDateEnd", dateTime.ToString("yyyy-MM-dd 23:59:59"));
                 var datas = await DatabaseCommand.GetDataRows<Consulta>(query, _dbConnection, parameters);
                 return datas;
             }
@@ -48,7 +48,7 @@ namespace Challenger.Repository.Repository
             }
         }
 
-        public async Task<bool> MarcarConsulta(Consulta consulta)
+        public async Task<bool> CadastrarConsulta(Consulta consulta)
         {
             try
             {
@@ -66,16 +66,14 @@ namespace Challenger.Repository.Repository
                 parameters.Add("RelatorioMedico", consulta.RelatorioMedico);
                 parameters.Add("idPrescricao", consulta.IdPrescricao);
                 parameters.Add("idAtendimento", consulta.IdAtendimento);
-                var results = await DatabaseCommand.InsertRowsDatabase(query, _dbConnection, parameters);
+                var results = await DatabaseCommand.InserirDados(query, _dbConnection, parameters);
                 return results > 0;
             }
             catch (Exception ex)
             {
                 LambdaLogger.Log($@"{nameof(ConsultaRepository)} - {ex.Message}");
-                return false;
+                throw;
             }
         }
-
-
     }
 }

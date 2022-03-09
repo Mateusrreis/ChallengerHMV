@@ -33,7 +33,7 @@ namespace Challenger.Services.Services
             var atendimento = await _atendimentoRepository.BuscarAtendimento(consulta.IdAtendimento);
             if (await VerificarDisponibilidadeAgendamento(consulta.DtConsulta, TimeSpan.FromMinutes(30)))
             {
-                var result = await _consultaRepository.MarcarConsulta(consulta);
+                var result = await _consultaRepository.CadastrarConsulta(consulta);
 
                 return AgendamentoConsultaResponse.Builder.Criar(
                     agendado: result,
@@ -56,6 +56,7 @@ namespace Challenger.Services.Services
         private async Task<bool> VerificarDisponibilidadeAgendamento(DateTime dtConsulta, TimeSpan timeSpan)
         {
             var consultaRecente = await _consultaRepository.BuscarConsulta(dtConsulta);
+            consultaRecente.Where(data => dtConsulta >= data.DtConsulta && dtConsulta <= data.DtConsulta.AddMinutes(timeSpan.Minutes));
             if (consultaRecente.Any()) return false;
             return true;
         }
