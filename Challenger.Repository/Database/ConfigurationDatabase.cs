@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Npgsql;
 using System;
 using System.Data;
 
@@ -16,6 +15,6 @@ namespace Challenger.Repository.Database
             return connection;
         }
 
-        public static void CloseDatabase(NpgsqlConnection connection) => connection.Close();
+        public static void CloseDatabase(MySqlConnection connection) => connection.Close();
     }
 }

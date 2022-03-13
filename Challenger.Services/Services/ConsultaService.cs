@@ -1,8 +1,6 @@
 ﻿using Challenger.Models;
-using Challenger.Models.Entities;
+using Challenger.Models.Models.Entities;
 using Challenger.Models.Models.Interfaces;
-using Challenger.Repository.Interfaces;
-using Challenger.Services.Interfaces;
 using CreateTokenLambda.Models.ResponseDtos;
 using System;
 using System.Linq;
@@ -12,53 +10,31 @@ namespace Challenger.Services.Services
 {
     public class ConsultaServices : IConsultaServices
     {
-        private readonly IConsultaRepository _consultaRepository;
-        private readonly IAtendimentoRepository _atendimentoRepository;
+        private readonly IAgendamentoConsultaRepository _agendamentoConsultaRepository;
 
-        public ConsultaServices(IConsultaRepository consultaRepository, IAtendimentoRepository atendimentoRepository)
+        public ConsultaServices(IAgendamentoConsultaRepository agendamentoConsultaRepository)
         {
-            _consultaRepository = consultaRepository;
-            _atendimentoRepository = atendimentoRepository;
+            _agendamentoConsultaRepository = agendamentoConsultaRepository;
         }
 
         public async Task<AgendamentoConsultaResponse> MarcarConsulta(CalendarConsultaRequest calendarConsultaRequest)
         {
-            var consulta = Consulta.Builder.Criar(calendarConsultaRequest.IdMedico,
-                calendarConsultaRequest.DtConsulta,
-                null,
-                calendarConsultaRequest.IdPrescricao,
-                calendarConsultaRequest.IdAtendimento
-                );
-
-            var atendimento = await _atendimentoRepository.BuscarAtendimento(consulta.IdAtendimento);
-            if (await VerificarDisponibilidadeAgendamento(consulta.DtConsulta, TimeSpan.FromMinutes(30)))
+            var duration = TimeSpan.FromMinutes(30);
+            AgendamentoConsultaResponse consultaResponse = AgendamentoConsultaResponse.Builder.Criar(false, calendarConsultaRequest.IdMedico, calendarConsultaRequest.DtConsulta, DateTime.Now); ;
+            if (!await VerificarDisponibilidadeAgendamento(calendarConsultaRequest.DtConsulta, duration))
             {
-                var result = await _consultaRepository.CadastrarConsulta(consulta);
-
-                return AgendamentoConsultaResponse.Builder.Criar(
-                    agendado: result,
-                    idPaciente: atendimento.IdPaciente,
-                    idMedico: calendarConsultaRequest.IdMedico,
-                    dtAgendamento: calendarConsultaRequest.DtConsulta,
-                    createdIn: DateTime.Now
-                    );
+                var agendamento = AgendaConsulta.Builder.Create(calendarConsultaRequest.DtConsulta, calendarConsultaRequest.DtConsulta, duration.Minutes, calendarConsultaRequest.IdMedico);
+                var consulta = await _agendamentoConsultaRepository.InserirAgendamento(agendamento);
+                consultaResponse = AgendamentoConsultaResponse.Builder.Criar(true, consulta.IdMedico.Value, consulta.DtConsulta.Value, DateTime.Now);
             }
-
-            return AgendamentoConsultaResponse.Builder.Criar(
-                    agendado: false,
-                    idPaciente: atendimento.IdPaciente,
-                    idMedico: calendarConsultaRequest.IdMedico,
-                    dtAgendamento: calendarConsultaRequest.DtConsulta,
-                    createdIn: DateTime.Now
-                    );
+            return consultaResponse;
         }
 
-        private async Task<bool> VerificarDisponibilidadeAgendamento(DateTime dtConsulta, TimeSpan timeSpan)
+        private async Task<bool> VerificarDisponibilidadeAgendamento(DateTime horaConsulta, TimeSpan timeSpan)
         {
-            var consultaRecente = await _consultaRepository.BuscarConsulta(dtConsulta);
-            consultaRecente.Where(data => dtConsulta >= data.DtConsulta && dtConsulta <= data.DtConsulta.AddMinutes(timeSpan.Minutes));
-            if (consultaRecente.Any()) return false;
-            return true;
+            var agendamentoConsulta = await _agendamentoConsultaRepository.VerificarAgendaConsulta(horaConsulta);
+            var validacaoAgendamento = agendamentoConsulta.Any(e => horaConsulta >= e.HrConsulta && horaConsulta <= e.HrConsulta.Value.AddMinutes(timeSpan.Minutes));
+            return validacaoAgendamento;
         }
     }
 }

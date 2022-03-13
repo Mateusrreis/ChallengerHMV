@@ -8,6 +8,7 @@ namespace Challenger.Models.Models.Interfaces
     public interface IAgendamentoConsultaRepository
     {
         Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsulta);
-        Task<bool> MarcarConsulta(AgendaConsulta agendaConsulta);
+        Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta);
+        Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta);
     }
 }

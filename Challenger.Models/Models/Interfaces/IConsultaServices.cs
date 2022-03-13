@@ -2,7 +2,7 @@
 using CreateTokenLambda.Models.ResponseDtos;
 using System.Threading.Tasks;
 
-namespace Challenger.Services.Interfaces
+namespace Challenger.Models.Models.Interfaces
 {
     public interface IConsultaServices
     {

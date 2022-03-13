@@ -1,33 +1,20 @@
 ﻿using System;
 
-namespace Challenger.Models.Entities
+
+namespace Challenger.Models.Models.Entities
 {
     public class Consulta
     {
-        public Consulta()
-        {
-        }
+        public int IdConsulta { get; set; }
+        public string IdMedico { get; set; }
+        public DateTime? DtConsulta { get; set; }
+        public string StrRelatorioMedico { get; set; }
+        public int? IdPrescricao { get; set; }
+        public int? IdAtendimento { get; set; }
+        public bool? FlgTeleconsulta { get; set; }
+        public string StrPlataformaTeleconsulta { get; set; }
 
-        protected Consulta(int idMedico, DateTime dtConsulta, string relatorioMedico, int idPrescricao, int idAtendimento)
-        {
-            IdMedico = idMedico;
-            DtConsulta = dtConsulta;
-            RelatorioMedico = relatorioMedico;
-            IdPrescricao = idPrescricao;
-            IdAtendimento = idAtendimento;
-        }
-
-        public int IdConsulta { get; protected set; }
-        public int IdMedico { get; protected set; }
-        public DateTime DtConsulta { get; protected set; }
-        public string RelatorioMedico { get; protected set; }
-        public int IdPrescricao { get; protected set; }
-        public int IdAtendimento { get; protected set; }
-
-        public static class Builder
-        {
-            public static Consulta Criar(int idMedico, DateTime dtConsulta, string relatorioMedico, int idPrescricao, int idAtendimento)
-                => new Consulta(idMedico, dtConsulta, relatorioMedico, idPrescricao, idAtendimento);
-        }
+        public virtual Atendimento IdAtendimentoNavigation { get; set; }
+        public virtual Prescricao IdPrescricaoNavigation { get; set; }
     }
 }

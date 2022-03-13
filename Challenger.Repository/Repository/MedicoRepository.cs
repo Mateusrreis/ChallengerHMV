@@ -1,4 +1,4 @@
-﻿using Challenger.Models.Entities;
+﻿using Challenger.Models.Models.Entities;
 using Challenger.Repository.Database;
 using Challenger.Repository.Interfaces;
 using Dapper;

@@ -4,9 +4,10 @@ using Challenger.DependencyInjection;
 using Challenger.DependencyInjection.Dependencies;
 using Challenger.Interfaces;
 using Challenger.Models;
-using Challenger.Services.Interfaces;
+using Challenger.Models.Models.Interfaces;
 using CreateTokenLambda.Models.ResponseDtos;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 
@@ -20,17 +21,31 @@ namespace SolucionChallenger
         IBuildChallengerConfiguration _buildConfiguration;
         ServiceProvider _serviceProvider;
         IConsultaServices _consultaServices;
+        ITransactionDatabaseService _transactionDatabaseService;
 
         public Function()
         {
             _serviceProvider = BuildServices();
             _buildConfiguration = _serviceProvider.GetService<IBuildChallengerConfiguration>();
             _consultaServices = _serviceProvider.GetService<IConsultaServices>();
+            _transactionDatabaseService = _serviceProvider.GetService<ITransactionDatabaseService>();
         }
 
         public async Task<AgendamentoConsultaResponse> AgendarConsultaAsync(CalendarConsultaRequest input)
         {
-            return await _consultaServices.MarcarConsulta(input);
+            try
+            {
+                var consulta = await _consultaServices.MarcarConsulta(input);
+                _transactionDatabaseService.CommitTransactionDatabase();
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+
+                LambdaLogger.Log($@"{nameof(Function)} - {ex.Message}");
+                _transactionDatabaseService.RollbackTransactionDatabase();
+                throw;
+            }
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection)
