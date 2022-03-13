@@ -5,9 +5,12 @@ using Challenger.DependencyInjection.Dependencies;
 using Challenger.Interfaces;
 using Challenger.Models;
 using Challenger.Models.Models.Interfaces;
+using Challenger.Models.Models.RequestDtos;
+using Challenger.Models.Models.ResponseDtos;
 using CreateTokenLambda.Models.ResponseDtos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -41,11 +44,15 @@ namespace SolucionChallenger
             }
             catch (Exception ex)
             {
-
                 LambdaLogger.Log($@"{nameof(Function)} - {ex.Message}");
-                _transactionDatabaseService.RollbackTransactionDatabase();
                 throw;
             }
+        }
+
+        public async Task<IEnumerable<DataAgendamentoResponse>> GetAgendamentoConsultasAsync(AgendamentoRequest agendamentoRequest)
+        {
+            var consultas = await _consultaServices.VerificarConsultasAgendadas(agendamentoRequest);
+            return consultas;
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection)
