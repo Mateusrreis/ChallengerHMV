@@ -1,5 +1,4 @@
-﻿using Challenger.Models.Entities;
-using Challenger.Repository.Database;
+﻿using Challenger.Repository.Database;
 using Challenger.Repository.Interfaces;
 using Dapper;
 using System.Collections.Generic;

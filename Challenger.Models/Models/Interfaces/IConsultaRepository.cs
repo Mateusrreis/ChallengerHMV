@@ -1,4 +1,4 @@
-﻿using Challenger.Models.Entities;
+﻿using Challenger.Repository;
 using System.Threading.Tasks;
 
 namespace Challenger.Models.Interfaces

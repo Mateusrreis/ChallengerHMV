@@ -1,5 +1,4 @@
 ﻿using Amazon.Lambda.Core;
-using Challenger.Models.Models.Entities;
 using Challenger.Models.Models.Interfaces;
 using Challenger.Repository.Database;
 using Dapper;

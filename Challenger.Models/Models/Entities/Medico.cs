@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
-namespace Challenger.Models.Entities
+namespace Challenger.Repository
 {
-    public class Medico
+    public partial class Medico
     {
         public int IdMedico { get; set; }
-        public string idUsuario { get; set; }
-        public string CRM { get; set; }
-        public string Especialidade { get; set; }
+        public int? IdUsuario { get; set; }
+        public float? FltCrm { get; set; }
+        public int? IdEspecialidade { get; set; }
+        public virtual ICollection<AgendaConsulta> AgendaConsulta { get; set; }
     }
 }

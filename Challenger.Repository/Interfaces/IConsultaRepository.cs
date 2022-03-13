@@ -1,5 +1,4 @@
-﻿using Challenger.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

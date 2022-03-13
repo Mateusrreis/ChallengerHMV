@@ -1,5 +1,4 @@
 ﻿using Amazon.Lambda.Core;
-using Challenger.Models.Entities;
 using Challenger.Repository.Database;
 using Challenger.Repository.Interfaces;
 using Dapper;
@@ -63,7 +62,6 @@ namespace Challenger.Repository.Repository
                 var parameters = new DynamicParameters();
                 parameters.Add("idMedico", consulta.IdMedico);
                 parameters.Add("dtConsulta", consulta.DtConsulta);
-                parameters.Add("RelatorioMedico", consulta.RelatorioMedico);
                 parameters.Add("idPrescricao", consulta.IdPrescricao);
                 parameters.Add("idAtendimento", consulta.IdAtendimento);
                 var results = await DatabaseCommand.InserirDados(query, _dbConnection, parameters);

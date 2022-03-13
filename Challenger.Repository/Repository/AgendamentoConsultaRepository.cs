@@ -1,47 +1,38 @@
 ﻿using Amazon.Lambda.Core;
-using Challenger.Models.Models.Entities;
 using Challenger.Models.Models.Interfaces;
-using Challenger.Repository.Database;
-using Dapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Challenger.Repository.Repository
 {
     public class AgendamentoConsultaRepository : IAgendamentoConsultaRepository
     {
-        private readonly IDbConnection _dbConnection;
+        private HMVContext _hMVContext;
 
-        public AgendamentoConsultaRepository() => _dbConnection = ConfigurationDatabase.OpenDatabase();
-        public async Task<bool> MarcarConsulta(AgendaConsulta agendaConsulta)
+        public AgendamentoConsultaRepository(HMVContext context)
+        {
+            _hMVContext = context;
+        }
+
+        public Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta)
         {
             try
             {
-                var query = $@"INSERT INTO HMV.AgendaConsulta
-                            (idPaciente,
-                            dtCadastro,
-                            dtConsulta, 
-                            hrConsulta, 
-                            intMinsDuracaoConsulta,
-                            idEspecialidade,
-                            idMedico)
-                            VALUES(@idPaciente, @dataCadastro, @dataConsulta, @horaConsulta, @minsDuracaoConsulta, @idEspecialidade, @idMedico)";
-                var parameters = new DynamicParameters();
-                parameters.Add("@idPaciente", agendaConsulta.IdPaciente);
-                parameters.Add("@dataCadastro", agendaConsulta.DtCadastro);
-                parameters.Add("@dataConsulta", agendaConsulta.DtConsulta);
-                parameters.Add("@horaConsulta", agendaConsulta.HrConsulta);
-                parameters.Add("@minsDuracaoConsulta", agendaConsulta.MinsDuracaoConsulta);
-                parameters.Add("@idEspecialidade", agendaConsulta.IdEspecialidade);
-                parameters.Add("@idMedico", agendaConsulta.IdMedico);
-                var result = await DatabaseCommand.InserirDados(query, _dbConnection, parameters);
-                return result > 0;
+                var insertRows = await _hMVContext.AgendaConsulta.AddAsync(agendaConsulta);
+                return insertRows.Entity;
             }
             catch (Exception ex)
             {
-                LambdaLogger.Log($@"{nameof(ConsultaRepository)} - {ex.Message}");
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
                 throw;
             }
         }
@@ -50,25 +41,12 @@ namespace Challenger.Repository.Repository
         {
             try
             {
-                var query = $@"SELECT 
-                              idAgendaConsulta as IdAgendaConsulta, 
-                              idPaciente as IdPaciente, 
-                              dtCadastro as DtCadastro, 
-                              dtConsulta as DtConsulta, 
-                              hrConsulta as HrConsulta, 
-                              intMinsDuracaoConsulta as MinsDuracaoConsulta, 
-                              idEspecialidade as IdEspecialidade, 
-                              idMedico as IdMedico
-                            FROM AgendaConsulta
-                            WHERE dtConsulta = @dateConsulta";
-                var parameters = new DynamicParameters();
-                parameters.Add("@dateConsulta", dateConsulta);
-                var datas = await DatabaseCommand.GetDataRows<AgendaConsulta>(query, _dbConnection, parameters);
-                return datas;
+                return await _hMVContext.AgendaConsulta.Where(e => e.DtConsulta == dateConsulta.Date)
+                            .ToListAsync();
             }
             catch (Exception ex)
             {
-                LambdaLogger.Log($@"{nameof(ConsultaRepository)} - {ex.Message}");
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
                 throw;
             }
         }
