@@ -1,6 +1,6 @@
 ﻿using Challenger.Models;
+using Challenger.Models.Models.Entities;
 using Challenger.Models.Models.Interfaces;
-using Challenger.Repository;
 using CreateTokenLambda.Models.ResponseDtos;
 using System;
 using System.Linq;

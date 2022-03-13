@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Atendimento
+    public class Atendimento
     {
         public Atendimento()
         {

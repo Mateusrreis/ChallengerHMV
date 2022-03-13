@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Usuario
+    public class Usuario
     {
         public Usuario()
         {

@@ -1,7 +1,7 @@
 ﻿
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Exame
+    public class Exame
     {
         public int IdExame { get; set; }
         public string DtExame { get; set; }

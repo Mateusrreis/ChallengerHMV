@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Consulta
+    public class Consulta
     {
         public int IdConsulta { get; set; }
         public string IdMedico { get; set; }

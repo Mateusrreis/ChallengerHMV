@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class TermosCondicaoUso
+    public class TermosCondicaoUso
     {
         public int IdTermosCondicaoUso { get; set; }
         public string StrTermosCondicaoUso { get; set; }

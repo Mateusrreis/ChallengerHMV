@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class AgendaConsulta
+    public class AgendaConsulta
     {
-
-
         public AgendaConsulta()
         {
             Atendimento = new HashSet<Atendimento>();
@@ -33,7 +31,7 @@ namespace Challenger.Repository
 
         public static class Builder
         {
-            public static AgendaConsulta Create(DateTime dtConsulta, DateTime hrConsulta, int intMinsDuracaoConsulta, int idMedico) 
+            public static AgendaConsulta Create(DateTime dtConsulta, DateTime hrConsulta, int intMinsDuracaoConsulta, int idMedico)
                 => new AgendaConsulta(dtConsulta, hrConsulta, intMinsDuracaoConsulta, idMedico);
         }
     }

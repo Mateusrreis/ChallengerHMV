@@ -2,9 +2,9 @@
 
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Municipio
+    public class Municipio
     {
         public Municipio()
         {

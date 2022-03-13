@@ -2,9 +2,9 @@
 
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class TipoExame
+    public class TipoExame
     {
         public TipoExame()
         {

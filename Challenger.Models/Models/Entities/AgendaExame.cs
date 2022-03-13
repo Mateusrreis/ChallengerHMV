@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Challenger.Models.Models.Entities;
+using System;
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class AgendaExame
+    public class AgendaExame
     {
         public int IdAgendaExame { get; set; }
         public DateTime? DtCadastro { get; set; }

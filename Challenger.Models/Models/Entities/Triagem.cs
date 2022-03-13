@@ -2,9 +2,9 @@
 
 
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Triagem
+    public class Triagem
     {
         public int IdTriagem { get; set; }
         public DateTime? DtTriagem { get; set; }

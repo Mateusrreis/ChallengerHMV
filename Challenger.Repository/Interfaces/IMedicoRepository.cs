@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Challenger.Models.Models.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Challenger.Repository.Interfaces

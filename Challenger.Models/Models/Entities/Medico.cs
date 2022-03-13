@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Challenger.Repository
+namespace Challenger.Models.Models.Entities
 {
-    public partial class Medico
+    public class Medico
     {
         public int IdMedico { get; set; }
         public int? IdUsuario { get; set; }
