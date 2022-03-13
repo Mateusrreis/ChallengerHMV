@@ -13,7 +13,5 @@ namespace Challenger.Services.Services
         }
 
         public async void CommitTransactionDatabase() => await _context.SaveChangesAsync();
-
-        public void RollbackTransactionDatabase() => _context.Database.RollbackTransaction();
     }
 }
