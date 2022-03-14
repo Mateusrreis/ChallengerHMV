@@ -36,9 +36,9 @@ namespace Challenger.Services.Services
         public async Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadas(AgendamentoRequest agendamentoRequest)
         {
             var agendaConsultas = new List<DataAgendamentoResponse>();
-            var agendamento = await _agendamentoConsultaRepository.VerificarAgendaConsulta(agendamentoRequest.DtAgendamento);
+            var agendamento = await _agendamentoConsultaRepository.VerificarAgendaConsulta(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim);
             foreach (var agenda in agendamento)
-                agendaConsultas.Add(DataAgendamentoResponse.Builder.Create(agenda.DtConsulta.Value, agenda.IdMedico.Value,agenda.HrConsulta.Value));
+                agendaConsultas.Add(DataAgendamentoResponse.Builder.Create(agenda.DtConsulta.Value, agenda.IdMedico.Value, agenda.HrConsulta.Value));
             return agendaConsultas;
         }
 

@@ -4,6 +4,7 @@ namespace Challenger.Models.Models.RequestDtos
 {
     public class AgendamentoRequest
     {
-        public DateTime DtAgendamento { get; set; }
+        public DateTime DtAgendamentoInicio { get; set; }
+        public DateTime DtAgendamentoFim { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace SolucionChallenger
             try
             {
                 var consulta = await _consultaServices.MarcarConsulta(input);
-                _transactionDatabaseService.CommitTransactionDatabase();
+                if (consulta.Agendado) _transactionDatabaseService.CommitTransactionDatabase();
                 return consulta;
             }
             catch (Exception ex)

@@ -38,11 +38,25 @@ namespace Challenger.Repository.Repository
             }
         }
 
+        public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsultaInicio, DateTime dateConsultaFim)
+        {
+            try
+            {
+                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim)
+                            .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsulta)
         {
             try
             {
-                return await _hMVContext.AgendaConsulta.Where(e => e.DtConsulta == dateConsulta.Date)
+                return await _hMVContext.AgendaConsulta.Where(e => e.DtConsulta.Value == dateConsulta)
                             .ToListAsync();
             }
             catch (Exception ex)
