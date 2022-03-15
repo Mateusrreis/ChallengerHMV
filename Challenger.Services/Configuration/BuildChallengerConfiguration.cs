@@ -1,11 +1,11 @@
-﻿using Challenger.Interfaces;
+﻿using Challenger.Models.Models.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+
 using System.IO;
 
-namespace Challenger
+namespace Challenger.Services.Configuration
 {
-    internal class BuildChallengerConfiguration : IBuildChallengerConfiguration
+    public class BuildChallengerConfiguration : IBuildChallengerConfiguration
     {
         public IConfiguration Configuration => new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())

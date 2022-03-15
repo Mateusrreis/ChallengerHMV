@@ -14,16 +14,18 @@ namespace Challenger.Services.Services
     public class ConsultaServices : IConsultaServices
     {
         private readonly IAgendamentoConsultaRepository _agendamentoConsultaRepository;
+        private readonly IBuildChallengerConfiguration _configuration;
 
-        public ConsultaServices(IAgendamentoConsultaRepository agendamentoConsultaRepository)
+        public ConsultaServices(IAgendamentoConsultaRepository agendamentoConsultaRepository, IBuildChallengerConfiguration configuration)
         {
             _agendamentoConsultaRepository = agendamentoConsultaRepository;
+            _configuration = configuration;
         }
 
         public async Task<AgendamentoConsultaResponse> MarcarConsulta(CalendarConsultaRequest calendarConsultaRequest)
         {
-            var duration = TimeSpan.FromMinutes(30);
-            AgendamentoConsultaResponse consultaResponse = AgendamentoConsultaResponse.Builder.Criar(false, calendarConsultaRequest.IdMedico, calendarConsultaRequest.DtConsulta, DateTime.Now); ;
+            var duration = TimeSpan.FromMinutes(Convert.ToDouble(_configuration.Configuration["duracaoConsulta"]));
+            AgendamentoConsultaResponse consultaResponse = AgendamentoConsultaResponse.Builder.Criar(false, calendarConsultaRequest.IdMedico, calendarConsultaRequest.DtConsulta, DateTime.Now);
             if (!await VerificarDisponibilidadeAgendamento(calendarConsultaRequest.DtConsulta, duration))
             {
                 var agendamento = AgendaConsulta.Builder.Create(calendarConsultaRequest.DtConsulta, calendarConsultaRequest.DtConsulta, duration.Minutes, calendarConsultaRequest.IdMedico);

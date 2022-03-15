@@ -1,12 +1,11 @@
 using Amazon.Lambda.Core;
-using Challenger;
 using Challenger.DependencyInjection;
 using Challenger.DependencyInjection.Dependencies;
-using Challenger.Interfaces;
 using Challenger.Models;
 using Challenger.Models.Models.Interfaces;
 using Challenger.Models.Models.RequestDtos;
 using Challenger.Models.Models.ResponseDtos;
+using Challenger.Services.Configuration;
 using CreateTokenLambda.Models.ResponseDtos;
 using Microsoft.Extensions.DependencyInjection;
 using System;

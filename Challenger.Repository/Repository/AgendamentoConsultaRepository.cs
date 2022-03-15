@@ -56,7 +56,7 @@ namespace Challenger.Repository.Repository
         {
             try
             {
-                return await _hMVContext.AgendaConsulta.Where(e => e.DtConsulta.Value == dateConsulta)
+                return await _hMVContext.AgendaConsulta.Where(e => e.DtConsulta.Value == dateConsulta.Date)
                             .ToListAsync();
             }
             catch (Exception ex)
