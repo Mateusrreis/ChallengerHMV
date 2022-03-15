@@ -9,6 +9,7 @@ namespace CreateTokenLambda.Models.ResponseDtos
             Agendado = agendado;
             IdMedico = idMedico;
             CreatedIn = createdIn;
+            DtAgendamento = dtAgendamento;
         }
 
         public bool Agendado { get; set; }
