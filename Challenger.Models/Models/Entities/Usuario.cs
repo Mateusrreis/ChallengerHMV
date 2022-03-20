@@ -7,6 +7,7 @@ namespace Challenger.Models.Models.Entities
         public Usuario()
         {
             AgendaExame = new HashSet<AgendaExame>();
+            Medico = new HashSet<Medico>();
         }
 
         public int IdUsuario { get; set; }
@@ -25,5 +26,6 @@ namespace Challenger.Models.Models.Entities
 
         public virtual Municipio IdEnderecoMunicipioNavigation { get; set; }
         public virtual ICollection<AgendaExame> AgendaExame { get; set; }
+        public virtual ICollection<Medico> Medico { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Amazon.Lambda.Core;
-using Challenger.DependencyInjection;
+﻿using Challenger.DependencyInjection;
 using Challenger.DependencyInjection.Dependencies;
 using Challenger.Models.Models.Interfaces;
+using Challenger.Models.Models.RequestDtos;
 using Challenger.Models.Models.ResponseDtos;
 using Challenger.Services.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +23,11 @@ namespace SolucionChallenger
             _especialidadeService = _serviceProvider.GetService<IEspecialidadeService>();
         }
 
-        public async Task<IEnumerable<EspecialidadeResponse>> GetEspecialidadesAsync() 
+        public async Task<IEnumerable<EspecialidadeResponse>> GetEspecialidadesAsync()
             => await _especialidadeService.BuscarEspecialidadeAsync();
+
+        public async Task<IEnumerable<MedicoResponse>> GetMedicosEspecialidadeAsync(EspecialidadeMedicoRequest especialidadeMedicoRequest)
+            => await _especialidadeService.ObterMedicoEspecilidade(especialidadeMedicoRequest.IdEspecialidade);
 
         private void ConfigureServices(IServiceCollection serviceCollection)
         {

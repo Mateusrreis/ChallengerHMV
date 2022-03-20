@@ -358,6 +358,11 @@ namespace Challenger.Repository
                     .HasColumnName("idUsuario")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'NULL'");
+
+                entity.HasOne(d => d.UsuarioMap)
+                   .WithMany(p => p.Medico)
+                   .HasForeignKey(d => d.IdUsuario)
+                   .HasConstraintName("IdUsuario");
             });
 
             modelBuilder.Entity<Municipio>(entity =>

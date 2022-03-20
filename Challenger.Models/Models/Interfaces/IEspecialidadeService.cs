@@ -7,5 +7,6 @@ namespace Challenger.Models.Models.Interfaces
     public interface IEspecialidadeService
     {
         Task<IEnumerable<EspecialidadeResponse>> BuscarEspecialidadeAsync();
+        Task<IEnumerable<MedicoResponse>> ObterMedicoEspecilidade(int idEspecialidade);
     }
 }

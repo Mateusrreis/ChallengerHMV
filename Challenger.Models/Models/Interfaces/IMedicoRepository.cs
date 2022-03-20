@@ -6,6 +6,6 @@ namespace Challenger.Models.Interfaces
 {
     public interface IMedicoRepository
     {
-        Task<IEnumerable<Medico>> GetDoctorsAsync(int idDoctor);
+        Task<IEnumerable<Medico>> ObterMedicosPorEspecialidade(int idEspecialidade);
     }
 }
