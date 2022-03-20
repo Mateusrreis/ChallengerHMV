@@ -14,8 +14,8 @@
   "image-command": "Challenger::SolucionChallenger.Function::AgendarConsultaAsync",
   "docker-host-build-output-dir": "./bin/Release/lambda-publish",
   "framework": "netcoreapp3.1",
-  "function-name": "marcar-consulta-hmv",
-  "function-description": "Marcar Consulta",
+  "function-name": "especialidades-medico-hmv",
+  "function-description": "Obter Especialidades",
   "function-role": "arn:aws:iam::982476397462:role/service-role/ReadFilesStudiesBible-role-bokzz1id",
   "function-runtime": "dotnetcore3.1",
   "function-architecture": "x86_64",
@@ -24,5 +24,5 @@
   "duracaoConsulta": "30",
   "dockerfile": "Dockerfile",
   "image-tag": "",
-  "function-handler": "Challenger::SolucionChallenger.Function::AgendarConsultaAsync"
+  "function-handler": "Challenger::SolucionChallenger.EspecialidadeFunction::GetEspecialidadesAsync"
 }

@@ -10,6 +10,7 @@ namespace Challenger.DependencyInjection.Dependencies
         {
             serviceCollection.AddScoped<IConsultaServices, ConsultaServices>();
             serviceCollection.AddScoped<ITransactionDatabaseService, TransactionDatabaseService>();
+            serviceCollection.AddScoped<IEspecialidadeService, EspecialidadeService>();
         }
     }
 }

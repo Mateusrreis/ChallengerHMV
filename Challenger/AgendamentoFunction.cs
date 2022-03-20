@@ -18,14 +18,14 @@ using System.Threading.Tasks;
 
 namespace SolucionChallenger
 {
-    public class Function
+    public class AgendamentoFunction
     {
         IBuildChallengerConfiguration _buildConfiguration;
         ServiceProvider _serviceProvider;
         IConsultaServices _consultaServices;
         ITransactionDatabaseService _transactionDatabaseService;
 
-        public Function()
+        public AgendamentoFunction()
         {
             _serviceProvider = BuildServices();
             _buildConfiguration = _serviceProvider.GetService<IBuildChallengerConfiguration>();
@@ -43,7 +43,7 @@ namespace SolucionChallenger
             }
             catch (Exception ex)
             {
-                LambdaLogger.Log($@"{nameof(Function)} - {ex.Message}");
+                LambdaLogger.Log($@"{nameof(AgendamentoFunction)} - {ex.Message}");
                 throw;
             }
         }
@@ -54,7 +54,7 @@ namespace SolucionChallenger
             return consultas;
         }
 
-        public void ConfigureServices(IServiceCollection serviceCollection)
+        private void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IBuildChallengerConfiguration, BuildChallengerConfiguration>();
             serviceCollection.AddDependencyRepository();
