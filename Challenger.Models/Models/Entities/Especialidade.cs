@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-
-
-
-namespace Challenger.Models.Models.Entities
+﻿namespace Challenger.Models.Models.Entities
 {
     public class Especialidade
     {

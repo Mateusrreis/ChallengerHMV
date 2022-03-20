@@ -12,6 +12,7 @@ namespace Challenger.DependencyInjection
             serviceCollection.AddDbContext<HMVContext>();
             serviceCollection.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
             serviceCollection.AddScoped<IAgendamentoConsultaRepository, AgendamentoConsultaRepository>();
+            serviceCollection.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
         }
     }
 }

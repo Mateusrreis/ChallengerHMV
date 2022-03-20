@@ -14,10 +14,7 @@ namespace Challenger.Repository.Repository
     {
         private HMVContext _hMVContext;
 
-        public AgendamentoConsultaRepository(HMVContext context)
-        {
-            _hMVContext = context;
-        }
+        public AgendamentoConsultaRepository(HMVContext context) => _hMVContext = context;
 
         public Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta)
         {
