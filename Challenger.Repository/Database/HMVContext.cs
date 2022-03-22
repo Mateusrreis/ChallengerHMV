@@ -67,6 +67,11 @@ namespace Challenger.Repository
                     .HasColumnName("hrConsulta")
                     .HasDefaultValueSql("'NULL'");
 
+                entity.Property(e => e.IdUsuario)
+                    .HasColumnName("idUsuario")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'Null'");
+
                 entity.Property(e => e.IdMedico)
                     .HasColumnName("idMedico")
                     .HasColumnType("int(11)")

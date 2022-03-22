@@ -26,6 +26,7 @@ namespace Challenger.Models.Models.Entities
         public DateTime? HrConsulta { get; set; }
         public int? IntMinsDuracaoConsulta { get; set; }
         public int? IdMedico { get; set; }
+        public int? IdUsuario { get; set; }
         public virtual Medico idMedicoNavigation { get; set; }
         public virtual ICollection<Atendimento> Atendimento { get; set; }
 

@@ -35,13 +35,25 @@ namespace Challenger.Services.Services
             return consultaResponse;
         }
 
-        public async Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadas(AgendamentoRequest agendamentoRequest)
+        public async Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadasAsync(AgendamentoRequest agendamentoRequest)
         {
-            var agendaConsultas = new List<DataAgendamentoResponse>();
-            var agendamento = await _agendamentoConsultaRepository.VerificarAgendaConsulta(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim);
-            foreach (var agenda in agendamento)
-                agendaConsultas.Add(DataAgendamentoResponse.Builder.Create(agenda.DtConsulta.Value, agenda.IdMedico.Value, agenda.HrConsulta.Value));
-            return agendaConsultas;
+            var datasAgendamentos = new List<DataAgendamentoResponse>();
+            var agendamentoConsulta = new List<AgendaConsulta>();
+            if (!int.TryParse(agendamentoRequest.IdEspecialidade, out int especialidade)) Enumerable.Empty<DataAgendamentoResponse>();
+            if (agendamentoRequest.IdMedico is null)
+            {
+                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaEspecialidade(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim, especialidade)).ToList();
+            }
+            else
+            {
+                if (!int.TryParse(agendamentoRequest.IdMedico, out int medico)) Enumerable.Empty<DataAgendamentoResponse>();
+                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaMedico(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim, medico)).ToList();
+            }
+
+            foreach (var agenda in agendamentoConsulta)
+                datasAgendamentos.Add(DataAgendamentoResponse.Builder.Create(agenda.HrConsulta.Value, agenda.IdMedico.Value, agenda.IdAgendaConsulta, agenda.idMedicoNavigation.UsuarioMap.StrUsuario));
+
+            return datasAgendamentos;
         }
 
         private async Task<bool> VerificarDisponibilidadeAgendamento(DateTime horaConsulta, TimeSpan timeSpan)

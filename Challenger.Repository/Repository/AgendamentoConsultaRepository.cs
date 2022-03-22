@@ -35,12 +35,14 @@ namespace Challenger.Repository.Repository
             }
         }
 
-        public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsultaInicio, DateTime dateConsultaFim)
+        public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsultaEspecialidade(DateTime dateConsultaInicio, DateTime dateConsultaFim, int idEspecialidade)
         {
             try
             {
-                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim)
-                            .ToListAsync();
+                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdEspecialidade == idEspecialidade)
+                                .Include(e => e.idMedicoNavigation)
+                                .ThenInclude(e => e.UsuarioMap)
+                                .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -61,6 +63,23 @@ namespace Challenger.Repository.Repository
                 LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
                 throw;
             }
+        }
+
+        public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsultaMedico(DateTime dateConsultaInicio, DateTime dateConsultaFim, int idMedico)
+        {
+            try
+            {
+                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdMedico == idMedico)
+                                .Include(e => e.idMedicoNavigation)
+                                .ThenInclude(e => e.UsuarioMap)
+                                .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
+                throw;
+            }
+
         }
     }
 }

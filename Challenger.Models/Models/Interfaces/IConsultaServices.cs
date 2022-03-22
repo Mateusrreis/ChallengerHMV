@@ -9,6 +9,6 @@ namespace Challenger.Models.Models.Interfaces
     public interface IConsultaServices
     {
         Task<AgendamentoConsultaResponse> MarcarConsulta(CalendarConsultaRequest calendarConsultaRequest);
-        Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadas(AgendamentoRequest agendamentoRequest);
+        Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadasAsync(AgendamentoRequest agendamentoRequest);
     }
 }
