@@ -30,6 +30,9 @@ namespace Challenger.Models.Models.Entities
         public virtual Medico idMedicoNavigation { get; set; }
         public virtual ICollection<Atendimento> Atendimento { get; set; }
 
+        public void SetIdUsuario(int idUsuario) => IdUsuario = idUsuario;
+
+
         public static class Builder
         {
             public static AgendaConsulta Create(DateTime dtConsulta, DateTime hrConsulta, int intMinsDuracaoConsulta, int idMedico)

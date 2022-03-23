@@ -1,7 +1,9 @@
-﻿namespace Challenger.Models.Models.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Challenger.Models.Models.Interfaces
 {
     public interface ITransactionDatabaseService
     {
-        void CommitTransactionDatabase();
+        Task CommitTransactionDatabase();
     }
 }

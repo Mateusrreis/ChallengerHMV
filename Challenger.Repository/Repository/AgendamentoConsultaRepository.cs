@@ -16,10 +16,8 @@ namespace Challenger.Repository.Repository
 
         public AgendamentoConsultaRepository(HMVContext context) => _hMVContext = context;
 
-        public Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta)
+            => await _hMVContext.AgendaConsulta.FirstOrDefaultAsync(e => e.IdAgendaConsulta == idAgendaConsulta);
 
         public async Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta)
         {
@@ -35,11 +33,26 @@ namespace Challenger.Repository.Repository
             }
         }
 
+        public AgendaConsulta AtualizarAgendamento(AgendaConsulta agendaConsulta)
+        {
+            try
+            {
+                var insertRows = _hMVContext.AgendaConsulta.Update(agendaConsulta);
+                return insertRows.Entity;
+            }
+            catch (Exception ex)
+            {
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaRepository)} - {ex.Message}");
+                throw;
+            }
+        }
+
+
         public async Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsultaEspecialidade(DateTime dateConsultaInicio, DateTime dateConsultaFim, int idEspecialidade)
         {
             try
             {
-                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdEspecialidade == idEspecialidade)
+                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdEspecialidade == idEspecialidade && e.IdUsuario == null)
                                 .Include(e => e.idMedicoNavigation)
                                 .ThenInclude(e => e.UsuarioMap)
                                 .ToListAsync();
@@ -69,7 +82,7 @@ namespace Challenger.Repository.Repository
         {
             try
             {
-                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdMedico == idMedico)
+                return await _hMVContext.AgendaConsulta.Where(e => e.HrConsulta.Value >= dateConsultaInicio && e.HrConsulta.Value <= dateConsultaFim && e.idMedicoNavigation.IdMedico == idMedico && e.IdUsuario == null)
                                 .Include(e => e.idMedicoNavigation)
                                 .ThenInclude(e => e.UsuarioMap)
                                 .ToListAsync();
