@@ -1,5 +1,6 @@
 ﻿using Challenger.Models.Models.Interfaces;
 using Challenger.Repository;
+using System.Threading.Tasks;
 
 namespace Challenger.Services.Services
 {
@@ -12,6 +13,6 @@ namespace Challenger.Services.Services
             _context = context;
         }
 
-        public async void CommitTransactionDatabase() => await _context.SaveChangesAsync();
+        public async Task CommitTransactionDatabase() => await _context.SaveChangesAsync();
     }
 }

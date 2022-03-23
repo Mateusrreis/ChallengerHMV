@@ -6,5 +6,7 @@ namespace Challenger.Models.Models.RequestDtos
     {
         public DateTime DtAgendamentoInicio { get; set; }
         public DateTime DtAgendamentoFim { get; set; }
+        public string IdEspecialidade { get; set; }
+        public string IdMedico { get; set; }
     }
 }

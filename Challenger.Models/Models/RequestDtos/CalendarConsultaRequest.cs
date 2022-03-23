@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Challenger.Models.Models.RequestDtos.Enums;
 
 namespace Challenger.Models
 {
     public class CalendarConsultaRequest
     {
-        public DateTime DtConsulta { get; set; }
-        public int IdMedico { get; set; }
-        public int IdConsulta { get; set; }
-        public int IdPrescricao { get; set; }
-        public int IdAtendimento { get; set; }
+        public int IdUsuario { get; set; }
+        public int IdAgenda { get; set; }
+        public TipoAgendamento TipoAgendamento { get; set; }
     }
 }

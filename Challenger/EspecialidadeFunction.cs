@@ -6,6 +6,7 @@ using Challenger.Models.Models.ResponseDtos;
 using Challenger.Services.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SolucionChallenger
@@ -26,8 +27,11 @@ namespace SolucionChallenger
         public async Task<IEnumerable<EspecialidadeResponse>> GetEspecialidadesAsync()
             => await _especialidadeService.BuscarEspecialidadeAsync();
 
-        public async Task<IEnumerable<MedicoResponse>> GetMedicosEspecialidadeAsync(EspecialidadeMedicoRequest especialidadeMedicoRequest)
-            => await _especialidadeService.ObterMedicoEspecilidade(especialidadeMedicoRequest.IdEspecialidade);
+        public async Task<IEnumerable<MedicoResponse>> GetMedicosEspecialidadeAsync(EspecialidadeMedicoRequest request)
+        {
+            var isEspecialidade = int.TryParse(request.IdEspecialidade, out int idEspecialidade);
+            return isEspecialidade ? await _especialidadeService.ObterMedicoEspecilidade(idEspecialidade) : Enumerable.Empty<MedicoResponse>();
+        }
 
         private void ConfigureServices(IServiceCollection serviceCollection)
         {

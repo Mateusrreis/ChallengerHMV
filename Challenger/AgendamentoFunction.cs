@@ -37,8 +37,9 @@ namespace SolucionChallenger
         {
             try
             {
-                var consulta = await _consultaServices.MarcarConsulta(input);
-                if (consulta.Agendado) _transactionDatabaseService.CommitTransactionDatabase();
+                LambdaLogger.Log($@"{nameof(AgendamentoConsultaResponse)} - {input}");
+                var consulta = await _consultaServices.MarcarConsultaAsync(input);
+                if (consulta.Agendado) await _transactionDatabaseService.CommitTransactionDatabase();
                 return consulta;
             }
             catch (Exception ex)
@@ -50,7 +51,7 @@ namespace SolucionChallenger
 
         public async Task<IEnumerable<DataAgendamentoResponse>> GetAgendamentoConsultasAsync(AgendamentoRequest agendamentoRequest)
         {
-            var consultas = await _consultaServices.VerificarConsultasAgendadas(agendamentoRequest);
+            var consultas = await _consultaServices.VerificarConsultasAgendadasAsync(agendamentoRequest);
             return consultas;
         }
 

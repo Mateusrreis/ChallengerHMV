@@ -7,9 +7,11 @@ namespace Challenger.Models.Models.Interfaces
 {
     public interface IAgendamentoConsultaRepository
     {
-        Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsultaInicio, DateTime dateConsultaFim);
+        Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsultaEspecialidade(DateTime dateConsultaInicio, DateTime dateConsultaFim, int idEspecialidade);
+        Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsultaMedico(DateTime dateConsultaInicio, DateTime dateConsultaFim, int idMedico);
         Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsulta);
         Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta);
         Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta);
+        AgendaConsulta AtualizarAgendamento(AgendaConsulta agendaConsulta);
     }
 }
