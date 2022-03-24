@@ -10,6 +10,7 @@ using CreateTokenLambda.Models.ResponseDtos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -37,7 +38,6 @@ namespace SolucionChallenger
         {
             try
             {
-                LambdaLogger.Log($@"{nameof(AgendamentoConsultaResponse)} - {input}");
                 var consulta = await _consultaServices.MarcarConsultaAsync(input);
                 if (consulta.Agendado) await _transactionDatabaseService.CommitTransactionDatabase();
                 return consulta;
@@ -47,6 +47,14 @@ namespace SolucionChallenger
                 LambdaLogger.Log($@"{nameof(AgendamentoFunction)} - {ex.Message}");
                 throw;
             }
+        }
+
+        public async Task<IEnumerable<DataAgendamentoResponse>> GetPacienteRequestAsync(AgendamentoPacienteRequest agendamentoRequest)
+        {
+            var isUsuario = int.TryParse(agendamentoRequest.IdUsuario, out int idUsuario);
+            if (!isUsuario) Enumerable.Empty<IEnumerable<DataAgendamentoResponse>>();
+            var dataAgendamento = await _consultaServices.VerificarConsultasAgendadasPacienteAsync(idUsuario);
+            return dataAgendamento;
         }
 
         public async Task<IEnumerable<DataAgendamentoResponse>> GetAgendamentoConsultasAsync(AgendamentoRequest agendamentoRequest)

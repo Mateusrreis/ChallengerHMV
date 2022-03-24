@@ -12,6 +12,7 @@ namespace Challenger.Models.Models.Interfaces
         Task<IEnumerable<AgendaConsulta>> VerificarAgendaConsulta(DateTime dateConsulta);
         Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta);
         Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta);
+        Task<IEnumerable<AgendaConsulta>> BuscarAgendaConsultaPacienteAsync(int idUsuario);
         AgendaConsulta AtualizarAgendamento(AgendaConsulta agendaConsulta);
     }
 }

@@ -60,5 +60,14 @@ namespace Challenger.Services.Services
 
             return datasAgendamentos;
         }
+
+        public async Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadasPacienteAsync(int idUsuario)
+        {
+            var datasAgendamentos = new List<DataAgendamentoResponse>();
+            var agendamentoUsuarios = await _agendamentoConsultaRepository.BuscarAgendaConsultaPacienteAsync(idUsuario);
+            foreach (var agendamentoUsuario in agendamentoUsuarios)
+                datasAgendamentos.Add(DataAgendamentoResponse.Builder.Create(agendamentoUsuario.HrConsulta.Value, agendamentoUsuario.IdMedico.Value, agendamentoUsuario.IdAgendaConsulta, agendamentoUsuario.idMedicoNavigation.UsuarioMap.StrUsuario));
+            return datasAgendamentos;
+        }
     }
 }

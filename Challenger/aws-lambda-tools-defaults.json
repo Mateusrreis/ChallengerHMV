@@ -24,5 +24,5 @@
   "duracaoConsulta": "30",
   "dockerfile": "Dockerfile",
   "image-tag": "",
-  "function-handler": "Challenger::SolucionChallenger.AgendamentoFunction::GetAgendamentoConsultasAsync"
+  "function-handler": "Challenger::SolucionChallenger.AgendamentoFunction::GetPacienteRequestAsync"
 }

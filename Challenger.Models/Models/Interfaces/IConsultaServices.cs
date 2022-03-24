@@ -10,5 +10,6 @@ namespace Challenger.Models.Models.Interfaces
     {
         Task<AgendamentoConsultaResponse> MarcarConsultaAsync(CalendarConsultaRequest calendarConsultaRequest);
         Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadasAsync(AgendamentoRequest agendamentoRequest);
+        Task<IEnumerable<DataAgendamentoResponse>> VerificarConsultasAgendadasPacienteAsync(int agendamentoRequest);
     }
 }

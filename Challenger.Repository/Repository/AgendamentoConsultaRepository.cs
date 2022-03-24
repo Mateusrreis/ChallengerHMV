@@ -19,6 +19,12 @@ namespace Challenger.Repository.Repository
         public async Task<AgendaConsulta> BuscarAgendaConsulta(int idAgendaConsulta)
             => await _hMVContext.AgendaConsulta.FirstOrDefaultAsync(e => e.IdAgendaConsulta == idAgendaConsulta);
 
+        public async Task<IEnumerable<AgendaConsulta>> BuscarAgendaConsultaPacienteAsync(int idUsuario)
+           => await _hMVContext.AgendaConsulta.Where(e => e.IdUsuario == idUsuario)
+                        .Include(e => e.idMedicoNavigation)
+                        .ThenInclude(e => e.UsuarioMap)
+                        .ToListAsync();
+
         public async Task<AgendaConsulta> InserirAgendamento(AgendaConsulta agendaConsulta)
         {
             try
