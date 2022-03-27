@@ -47,12 +47,12 @@ namespace Challenger.Services.Services
             if (!int.TryParse(agendamentoRequest.IdEspecialidade, out int especialidade)) Enumerable.Empty<DataAgendamentoResponse>();
             if (string.IsNullOrEmpty(agendamentoRequest.IdMedico))
             {
-                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaEspecialidade(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim, especialidade)).ToList();
+                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaEspecialidade(agendamentoRequest.GetAgendamentoInicio(), agendamentoRequest.GetAgendamentoFim(), especialidade)).ToList();
             }
             else
             {
                 if (!int.TryParse(agendamentoRequest.IdMedico, out int medico)) Enumerable.Empty<DataAgendamentoResponse>();
-                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaMedico(agendamentoRequest.DtAgendamentoInicio, agendamentoRequest.DtAgendamentoFim, medico)).ToList();
+                agendamentoConsulta = (await _agendamentoConsultaRepository.VerificarAgendaConsultaMedico(agendamentoRequest.GetAgendamentoInicio(), agendamentoRequest.GetAgendamentoFim(), medico)).ToList();
             }
 
             foreach (var agenda in agendamentoConsulta)
