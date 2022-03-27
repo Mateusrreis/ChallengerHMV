@@ -59,6 +59,8 @@ namespace SolucionChallenger
 
         public async Task<IEnumerable<DataAgendamentoResponse>> GetAgendamentoConsultasAsync(AgendamentoRequest agendamentoRequest)
         {
+            agendamentoRequest.SetAgendamentoInicio(agendamentoRequest.DtAgendamentoInicio);
+            agendamentoRequest.SetAgendamentoFim(agendamentoRequest.DtAgendamentoFim);
             var consultas = await _consultaServices.VerificarConsultasAgendadasAsync(agendamentoRequest);
             return consultas;
         }
