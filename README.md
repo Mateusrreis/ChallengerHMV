@@ -9,3 +9,6 @@ Challenger FIAP
 ![image](https://user-images.githubusercontent.com/29742392/160301175-71756f76-7ebf-495c-8e1f-f8cce5335869.png)
 
 4 --> Você consegue rodar tambem diretamente pelo terminal colocando navegando até  \bin\Release\lambda-publish e executando esse comando dotnet CreateTokenLambda.dll
+
+5 --> Documentação do funcionamento da API do Challenger
+https://documenter.getpostman.com/view/7531158/UVyn3K1G
